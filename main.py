@@ -5,7 +5,7 @@ from datetime import datetime
 import stocknews as sn
 from googletrans import Translator
 import pandas_ta as ta
-from pyChatGPT import ChatGPT
+
 translator = Translator()
 import time
 import random
@@ -187,25 +187,9 @@ with Indicador_Tecnico:
     st.write(indicator)
 
 
-session_token = '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'
-api2 = ChatGPT(session_token)
-comprar_razones = api2.send_message(f' 3 Razones para comprar stocks de {ticker} ')
-vender_razones = api2.send_message(f' 3 Razones para vender stocks de {ticker} ')
-SWOT = api2.send_message(f' Realiza un Analisis SWOT del stocks {ticker} ')
+
 
 with Openai1:
-    tab_razon_vender, tab_razon_comprar, tab_SWOT =  st.tabs(['3 Razones para comprar', '3 Razones para vender', 'Analisis SWOT'])
-
-    with tab_razon_vender:
-        st.subheader(f' 3 Razones para comprar acciones de {ticker} ')
-        st.write(comprar_razones['message'])
-
-    with tab_razon_comprar:
-        st.subheader(f' 3 Razones para vender acciones de {ticker} ')
-        st.write(vender_razones['message'])
-
-    with tab_SWOT:
-        st.subheader(f' Analisis SWOT ')
-        st.write(SWOT['message'])
+    
 
 
