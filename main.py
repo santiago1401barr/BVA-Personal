@@ -5,7 +5,7 @@ from datetime import datetime
 import stocknews as sn
 from googletrans import Translator
 import pandas_ta as ta
-
+import openai
 translator = Translator()
 import time
 import random
@@ -20,6 +20,7 @@ Fecha_Inicio = st.sidebar.date_input("Fecha de Inicio", fecha_predeterminada)
 Fecha_Fin = st.sidebar.date_input("Fecha de Fin")
 monto = 1000
 texto = 'El precio actual de esta acción es '
+openai.api_key = st.secrets["OPENAI_API_KEY"]    
 
 #Grafico del movimiento de precios de la accion
 tickerData = yf.Ticker(ticker)
@@ -186,10 +187,46 @@ with Indicador_Tecnico:
     st.plotly_chart(figw_ind_new)
     st.write(indicator)
 
-
-
-
 with Openai1:
     
+    # Set a default model
+    if "openai_model" not in st.session_state:
+        st.session_state["openai_model"] = "gpt-3.5-turbo"
+        
+        # Inicializar el historial de chat
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+        
+        # Mostrar mensajes de chat del historial al volver a ejecutar la aplicación
+    for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
+        # Aceptar entrada del usuario
+    prompt = st.chat_input("¿Cómo puedo ayudarle con sus inversiones financieras?")
+    if prompt :
+        
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        # Agregar mensaje de usuario al historial de chat
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+             # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            full_response = ""
+            for response in openai.ChatCompletion.create(
+                model=st.session_state["openai_model"],
+                messages=[
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                    ],
+                    stream=True,
+                ):
+            
+                    full_response += response.choices[0].delta.get("content", "")
+                    message_placeholder.markdown(full_response + " ")
+                message_placeholder.markdown(full_response)
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
+                
 
