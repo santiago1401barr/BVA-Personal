@@ -3,5 +3,5 @@ plotly==5.15.0
 DateTime==5.4
 stocknews==0.9.11
 googletrans==4.0.0rc1
-pandas_ta==1.5.3
+pandas_ta==0.3.14b0
 pyChatGPT==0.4.3.3
