@@ -119,8 +119,9 @@ with informacion_empresa:
 
 with informacion_precios:
       st.header("Movimiento de Precios de la Acción")
-        data2 = data
-        data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1)
+      data2 = data
+      data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1)
+      data2.dropna(inplace = True)
       st.write(data2)
       st.write("Open: El precio al que se inició la negociación de acciones en un día específico.")
       st.write("High: El precio más alto de la acción durante un día específico. Es decir, el precio más alto al que se habían vendido las acciones en el mercado ese día.")
