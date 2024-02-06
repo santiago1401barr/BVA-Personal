@@ -19,7 +19,6 @@ Fecha_Inicio = st.sidebar.date_input("Fecha de Inicio", fecha_predeterminada)
 Fecha_Fin = st.sidebar.date_input("Fecha de Fin")
 monto = 1000
 texto = 'El precio actual de esta acción es '
-openai.api_key = st.secrets["OPENAI_API_KEY"]    
 
 #Grafico del movimiento de precios de la accion
 tickerData = yf.Ticker(ticker)
