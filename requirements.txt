@@ -7,6 +7,4 @@ DateTime==5.4
 stocknews==0.9.11
 googletrans==4.0.0rc1
 pandas_ta==0.3.14b0
-openai==1.11.1
 fbprophet==0.7.1
-httpx==0.23.0
