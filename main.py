@@ -8,9 +8,9 @@ import pandas_ta as ta
 translator = Translator()
 import time
 import random
+from alpha_vantage.fundamentaldata import FundamentalData
 
 #Codigo Principal
-
 st.set_page_config( page_title = "Simulador BVA")
 ticker_list = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/s-and-p-500-companies/master/data/constituents_symbols.txt')
 ticker = st.sidebar.selectbox('Stock ticker', ticker_list) # Select ticker symbol
@@ -105,7 +105,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa, informacion_precios, noticias, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal", "Indicador Tecnico"])
+informacion_empresa, informacion_precios, noticias, Portafolio, Analisis_Fundamental, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal", "Analisis Fundamental","Indicador Tecnico"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
@@ -119,7 +119,9 @@ with informacion_empresa:
 
 with informacion_precios:
       st.header("Movimiento de Precios de la Acción")
-      st.write(data)
+        data2 = data
+        data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1)
+      st.write(data2)
       st.write("Open: El precio al que se inició la negociación de acciones en un día específico.")
       st.write("High: El precio más alto de la acción durante un día específico. Es decir, el precio más alto al que se habían vendido las acciones en el mercado ese día.")
       st.write("Low: El precio de la acción en su punto más bajo durante un día en particular. En otras palabras, el precio más bajo al que se habían vendido las acciones en el mercado ese día.")
@@ -173,6 +175,9 @@ with Portafolio:
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")
 
+with Analisis_Fundamental:
+    
+    
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
     df = pd.DataFrame()
