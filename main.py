@@ -124,10 +124,10 @@ with informacion_precios:
     data2.dropna(inplace = True)
     st.write(data2)
     retorno_anual = data2['% Change'].mean()*252*100
-    st.write("El retorno anual de {ticker} es ", retorno_anual, "%")
+    st.write("El retorno anual de ", ticker," es ", retorno_anual, "%")
     desv_stand = np.std(data2["% Change"])*np.sqrt(252)
-    st.write("La desviacion estandar de los precios de {ticker} es ", desv_stand*100, "%")
-    st.write("La rendimiento ajustado al riesgo de {ticker} es ", retorno_anual/(desv_stand*100), "%")
+    st.write("La desviacion estandar de los precios de ",ticker," es ", desv_stand*100, "%")
+    st.write("La rendimiento ajustado al riesgo de ",ticker, "es ", retorno_anual/(desv_stand*100))
 
 
 with noticias:
