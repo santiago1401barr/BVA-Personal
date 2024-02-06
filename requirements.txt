@@ -9,4 +9,4 @@ googletrans==4.0.0rc1
 pandas_ta==0.3.14b0
 openai==1.11.1
 fbprophet==0.7.1
-httpx==0.13.3
+httpx==0.23.0
