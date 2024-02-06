@@ -132,7 +132,6 @@ with informacion_precios:
 
 with noticias:
     st.header(f"Noticias de {ticker}")
-
     sn = sn.StockNews(ticker, save_news = False)
     df_noticias = sn.read_rss()
     for i in range(10):
@@ -176,7 +175,6 @@ with Portafolio:
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")
 
-with Analisis_Fundamental:
     
     
 with Indicador_Tecnico:
