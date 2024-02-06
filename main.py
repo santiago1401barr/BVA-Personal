@@ -8,7 +8,7 @@ import pandas_ta as ta
 translator = Translator()
 import time
 import random
-from alpha_vantage.fundamentaldata import FundamentalData
+
 
 #Codigo Principal
 st.set_page_config( page_title = "Simulador BVA")
