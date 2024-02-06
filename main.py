@@ -118,17 +118,17 @@ with informacion_empresa:
       st.info(resumen_traducido.text)
 
 with informacion_precios:
-      st.header("Movimiento de Precios de la Acción")
-      data2 = data
-      data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1)
-      data2.dropna(inplace = True)
-      st.write(data2)
-      st.write("Open: El precio al que se inició la negociación de acciones en un día específico.")
-      st.write("High: El precio más alto de la acción durante un día específico. Es decir, el precio más alto al que se habían vendido las acciones en el mercado ese día.")
-      st.write("Low: El precio de la acción en su punto más bajo durante un día en particular. En otras palabras, el precio más bajo al que se habían vendido las acciones en el mercado ese día.")
-      st.write("Close: El precio al que finalizó la negociación de acciones en un día de mercado específico.")
-      st.write("Adj Close: El precio de cierre (Close) de la acción se resta de los dividendos o divisiones que se declararon sobre las acciones durante el día de negociación para llegar a este precio.")
-      st.write("Volume: Número total de acciones vendidas en el mercado durante un determinado día. Es un indicador crucial de la actividad del mercado y puede mostrar la fuerza y ​​dirección del movimiento del precio de una acción")
+    st.header("Movimiento de Precios de la Acción")
+    data2 = data
+    data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1) - 1
+    data2.dropna(inplace = True)
+    st.write(data2)
+    retorno_anual = data2['% Change'].mean()*252*100
+    st.write("El retorno anual de {ticker} es ", retorno_anual, "%")
+    desv_stand = np.std(data2["% Change"])*np.sqrt(252)
+    st.write("La desviacion estandar de los precios de {ticker} es ", desv_stand*100, "%")
+    st.write("La rendimiento ajustado al riesgo de {ticker} es ", retorno_anual/(desv_stand*100), "%")
+
 
 with noticias:
     st.header(f"Noticias de {ticker}")
