@@ -174,6 +174,8 @@ with Portafolio:
         portfolio_info = user.portfolio.get_portfolio_info()
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")
+
+
 with Analisis_Fundamental:
     alpha_vant_key = "6JPK7INS3JHG2X9C"
     fd = FundamentalData(key, output_format = 'pandas')
