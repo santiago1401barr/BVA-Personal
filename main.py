@@ -8,7 +8,6 @@ import pandas_ta as ta
 translator = Translator()
 import time
 import random
-from alpha_vantage.fundamentaldata import FundamentalData
 
 #Codigo Principal
 st.set_page_config( page_title = "Simulador BVA")
@@ -27,7 +26,6 @@ data = yf.download(ticker, start = Fecha_Inicio , end = Fecha_Fin )
 fig = px.line(data, x = data.index, y = data['Adj Close'], title = nombre_empresa)
 st.plotly_chart(fig)
 status_text = st.empty()
-
 
 #Objetos, Clases y Funciones
 class Stock:
@@ -177,23 +175,6 @@ with Portafolio:
 
 
 with Analisis_Fundamental:
-    alpha_vant_key = "6JPK7INS3JHG2X9C"
-    fd = FundamentalData(key, output_format = 'pandas')
-    st.subheader('Hoja de Balance')
-    hoja_balance = fd.get_balance_sheet_annual(ticker)[0]
-    bs = balanche_sheet.T[2:]
-    bs.columns = list(hoja_balance.T.iloc[0])
-    st.write(bs)
-    st.subheader("Estado de resultados")
-    estado_resultados = fd.get_income_statement_annual(ticker)[0]
-    is1 = estado_resultados.T[2:]
-    is1.columns = list(estado_resultados.T.iloc[0])
-    st.write(is1)
-    st.subheader("Estado de flujo de caja")
-    flujo_caja = fd.get_cash_flow_annual(ticker)[0]
-    cf = flujo_caja.T[2:]
-    cf.columns = list(flujo_caja.T.iloc[0])
-    st.write(cf)
     
     
 with Indicador_Tecnico:
