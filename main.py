@@ -171,11 +171,7 @@ with Portafolio:
         st.text(f"Historial de Inversiones o transacciones: {investment_history}")
         portfolio_info = user.portfolio.get_portfolio_info()
         for ticker, Cantidad in portfolio_info:
-          st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")
-
-
-with Analisis_Fundamental:
-    
+          st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")    
     
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
