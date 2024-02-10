@@ -1,4 +1,4 @@
-#Librerias a Importar
+ #Librerias a Importar
 import streamlit as st, pandas as pd, numpy as np, yfinance as yf
 import plotly.express as px
 from datetime import datetime
@@ -172,7 +172,10 @@ with Portafolio:
         portfolio_info = user.portfolio.get_portfolio_info()
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")    
-    
+
+with Analisis_Fundamental:
+    st.subheader("Datos Fundamentales: ")
+
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
     df = pd.DataFrame()
