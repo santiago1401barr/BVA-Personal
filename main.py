@@ -107,7 +107,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa, informacion_precios, noticias, Portafolio, Datos_Financieros, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal", "Analisis Financiero","Indicador Tecnico"])
+informacion_empresa, informacion_financiera, noticias, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal","Indicador Tecnico"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
@@ -130,7 +130,17 @@ with informacion_precios:
     desv_stand = np.std(data2["% Change"])*np.sqrt(252)
     st.write("La desviacion estandar de los precios de ",ticker," es ", desv_stand*100, "%")
     st.write("La rendimiento ajustado al riesgo de ",ticker, "es ", retorno_anual/(desv_stand*100))
-
+ 
+    url_base = 'https://financialmodelingprep.com/api/v3'
+    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
+    datos_financieros_extras = st.selectbox("Información Financiera ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
+                                                                     'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
+                                                                    'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
+                                                                     'historical-discounted-cash-flow-statement'))
+    url = f'{url_base}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
+    data_financiera = requests.get(url).json()
+    df_financiero = pd.DataFrame(data_financiera)
+    st.write(df_financiero)
 
 with noticias:
     st.header(f"Noticias de {ticker}")
@@ -177,17 +187,6 @@ with Portafolio:
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")    
 
-with Datos_Financieros:
-    url_base = 'https://financialmodelingprep.com/api/v3'
-    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos, que se encuentran en la seccion 'Datos de precios'")
-    datos_financieros_extras = st.selectbox("Información Financiera ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
-                                                                     'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
-                                                                    'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
-                                                                     'historical-discounted-cash-flow-statement'))
-    url = f'{url_base}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
-    data_financiera = requests.get(url).json()
-    df_financiero = pd.DataFrame(data_financiera)
-    st.write(df_financiero)
 
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
