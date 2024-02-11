@@ -185,7 +185,8 @@ with Datos_Financieros:
                                                                     'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
                                                                      'historical-discounted-cash-flow-statement'))
     url = f'{url_base}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
-    df_financiero = requests.get(url).json()
+    data_financiera = requests.get(url).json()
+    df_financiero = pd.DataFrame(data_financiera)
     st.write(df_financiero)
 
 with Indicador_Tecnico:
