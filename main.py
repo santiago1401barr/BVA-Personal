@@ -107,7 +107,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa, informacion_financiera, noticias, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal","Indicador Tecnico"])
+informacion_empresa, informacion_financiera, noticias, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Información Financiera", "Top 10 noticias", "Portafolio Personal","Indicador Tecnico"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
@@ -130,10 +130,11 @@ with informacion_financiera:
     desv_stand = np.std(data2["% Change"])*np.sqrt(252)
     st.write("La desviacion estandar de los precios de ",ticker," es ", desv_stand*100, "%")
     st.write("La rendimiento ajustado al riesgo de ",ticker, "es ", retorno_anual/(desv_stand*100))
- 
+    st.write("")
+
+    st.header("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
     url_base = 'https://financialmodelingprep.com/api/v3'
-    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
-    datos_financieros_extras = st.selectbox("Información Financiera ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
+    datos_financieros_extras = st.selectbox("Información Financiera extra ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
                                                                      'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
                                                                     'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
                                                                      'historical-discounted-cash-flow-statement'))
