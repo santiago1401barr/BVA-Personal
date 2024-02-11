@@ -107,7 +107,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa, informacion_financiera, noticias, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Información Financiera", "Top 10 noticias", "Portafolio Personal","Indicador Tecnico"])
+informacion_empresa,noticias, informacion_financiera, Portafolio, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Top 10 noticias", "Información Financiera", "Portafolio Personal","Indicador Tecnico"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
@@ -118,6 +118,18 @@ with informacion_empresa:
 
       resumen_traducido =  translator.translate(resumen_empresa, src='en', dest='es')
       st.info(resumen_traducido.text)
+
+with noticias:
+    st.header(f"Noticias de {ticker}")
+    sn = sn.StockNews(ticker, save_news = False)
+    df_noticias = sn.read_rss()
+    for i in range(10):
+      st.subheader(f"Noticia {i + 1}")
+      st.write(df_noticias['published'][i])
+      titulo_traducido = translator.translate(df_noticias['title'][i], src='en', dest='es')
+      st.write(titulo_traducido.text)
+      resumen_traducido = translator.translate(df_noticias['summary'][i], src='en', dest='es')
+      st.write(resumen_traducido.text)
 
 with informacion_financiera:
     st.header(f"Estados financieros de {ticker}")
@@ -144,18 +156,6 @@ with informacion_financiera:
     data_financiera = requests.get(url).json()
     df_financiero = pd.DataFrame(data_financiera)
     st.write(df_financiero)
-
-with noticias:
-    st.header(f"Noticias de {ticker}")
-    sn = sn.StockNews(ticker, save_news = False)
-    df_noticias = sn.read_rss()
-    for i in range(10):
-      st.subheader(f"Noticia {i + 1}")
-      st.write(df_noticias['published'][i])
-      titulo_traducido = translator.translate(df_noticias['title'][i], src='en', dest='es')
-      st.write(titulo_traducido.text)
-      resumen_traducido = translator.translate(df_noticias['summary'][i], src='en', dest='es')
-      st.write(resumen_traducido.text)
 
 with Portafolio:
     st.header("Portafolio del Usuario")
