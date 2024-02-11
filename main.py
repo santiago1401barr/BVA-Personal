@@ -9,9 +9,11 @@ translator = Translator()
 import time
 import random
 import requests
+import openai
 
 #Api Keys
 API_KEY_FMP = "XI4NPegcqzfwPKtPVCwM2xvPzMymjdUk"
+
 
 #Codigo Principal
 st.set_page_config( page_title = "Simulador BVA")
