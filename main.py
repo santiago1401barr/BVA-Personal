@@ -184,7 +184,7 @@ with Datos_Financieros:
                                                                      'historical-discounted-cash-flow-statement')
     url = f'{url_base}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
     df_financiero = requests.get(url).json()
-    st.write(df)
+    st.write(df_financiero)
 
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
