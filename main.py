@@ -107,7 +107,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa,noticias, informacion_financiera, Indicador_Tecnico, Portafolio = st.tabs(["¿De que trata la Empresa?", "Top 10 noticias", "Información Financiera","Indicador Tecnico", "Portafolio Personal"])
+informacion_empresa,noticias, informacion_financiera, Indicador_Tecnico, Portafolio = st.tabs(["¿De que trata la Empresa?", "Top 10 noticias", "Información Financiera","Indicadores Tecnicos", "Portafolio Personal"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
