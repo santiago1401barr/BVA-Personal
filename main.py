@@ -182,7 +182,7 @@ with Datos_Financieros:
                                                                      'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
                                                                     'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
                                                                      'historical-discounted-cash-flow-statement')
-    url = f'{base_url}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
+    url = f'{url_base}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
     df_financiero = requests.get(url).json()
     st.write(df)
 
