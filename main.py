@@ -134,7 +134,7 @@ with informacion_financiera:
     st.write("")
     st.write("")
 
-    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
+    st.write("Este apartado tiene informacion extra de la Acción ",ticker)
     url_base = 'https://financialmodelingprep.com/api/v3'
     datos_financieros_extras = st.selectbox("Información Financiera extra ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
                                                                      'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
