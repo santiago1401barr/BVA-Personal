@@ -5,11 +5,13 @@ import stocknews as sn
 import pandas_ta as ta
 from datetime import datetime
 from googletrans import Translator
-from api_key import API_KEY_FMP
 translator = Translator()
 import time
 import random
 import requests
+
+#Api Keys
+API_KEY_FMP = "XI4NPegcqzfwPKtPVCwM2xvPzMymjdUk"
 
 #Codigo Principal
 st.set_page_config( page_title = "Simulador BVA")
