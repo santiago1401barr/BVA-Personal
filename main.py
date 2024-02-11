@@ -120,7 +120,8 @@ with informacion_empresa:
       st.info(resumen_traducido.text)
 
 with informacion_financiera:
-    st.header("Movimiento de Precios de la Acción")
+    st.header("Estados financieros de {ticker}")
+    st.write("Este apartado tiene los datos de precios historicos la Acción ",ticker,)
     data2 = data
     data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1) - 1
     data2.dropna(inplace = True)
@@ -132,7 +133,7 @@ with informacion_financiera:
     st.write("La rendimiento ajustado al riesgo de ",ticker, "es ", retorno_anual/(desv_stand*100))
     st.write("")
 
-    st.header("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
+    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
     url_base = 'https://financialmodelingprep.com/api/v3'
     datos_financieros_extras = st.selectbox("Información Financiera extra ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
                                                                      'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
