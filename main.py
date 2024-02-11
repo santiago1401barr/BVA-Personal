@@ -179,7 +179,7 @@ with Portafolio:
 
 with Datos_Financieros:
     url_base = 'https://financialmodelingprep.com/api/v3'
-    st.write("Este apartado tiene informacion del ",ticker," ademas de los datos de precios historicos, que se encuentran en la seccion 'Datos de precios'")
+    st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos, que se encuentran en la seccion 'Datos de precios'")
     datos_financieros_extras = st.selectbox("Información Financiera ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
                                                                      'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
                                                                     'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
