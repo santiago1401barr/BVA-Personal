@@ -120,7 +120,7 @@ with informacion_empresa:
       st.info(resumen_traducido.text)
 
 with informacion_financiera:
-    st.header("Estados financieros de ",ticker})
+    st.header("Estados financieros de ",ticker)
     st.write("Este apartado tiene los datos de precios historicos la Acción ",ticker,)
     data2 = data
     data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1) - 1
