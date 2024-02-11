@@ -119,7 +119,7 @@ with informacion_empresa:
       resumen_traducido =  translator.translate(resumen_empresa, src='en', dest='es')
       st.info(resumen_traducido.text)
 
-with informacion_precios:
+with informacion_financiera:
     st.header("Movimiento de Precios de la Acción")
     data2 = data
     data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1) - 1
