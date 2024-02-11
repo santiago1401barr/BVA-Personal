@@ -9,7 +9,6 @@ translator = Translator()
 import time
 import random
 import requests
-import openai
 
 #Api Keys
 API_KEY_FMP = "XI4NPegcqzfwPKtPVCwM2xvPzMymjdUk"
