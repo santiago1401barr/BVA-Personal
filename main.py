@@ -120,7 +120,7 @@ with informacion_empresa:
       st.info(resumen_traducido.text)
 
 with informacion_financiera:
-    st.header("Estados financieros de {ticker}")
+    st.header("Estados financieros de ",ticker})
     st.write("Este apartado tiene los datos de precios historicos la Acción ",ticker,)
     data2 = data
     data2['% Change'] = data['Adj Close']/data['Adj Close'].shift(1) - 1
@@ -131,6 +131,7 @@ with informacion_financiera:
     desv_stand = np.std(data2["% Change"])*np.sqrt(252)
     st.write("La desviacion estandar de los precios de ",ticker," es ", desv_stand*100, "%")
     st.write("La rendimiento ajustado al riesgo de ",ticker, "es ", retorno_anual/(desv_stand*100))
+    st.write("")
     st.write("")
 
     st.write("Este apartado tiene informacion de la Acción ",ticker," ademas de los datos de precios historicos")
