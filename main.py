@@ -1,13 +1,15 @@
  #Librerias a Importar
 import streamlit as st, pandas as pd, numpy as np, yfinance as yf
 import plotly.express as px
-from datetime import datetime
 import stocknews as sn
-from googletrans import Translator
 import pandas_ta as ta
+from datetime import datetime
+from googletrans import Translator
+from api_key import API_KEY_FMP
 translator = Translator()
 import time
 import random
+import requests
 
 #Codigo Principal
 st.set_page_config( page_title = "Simulador BVA")
@@ -103,7 +105,7 @@ def conseguir_precio_actual(ticker):
 user = User(monto)
 
 
-informacion_empresa, informacion_precios, noticias, Portafolio, Analisis_Fundamental, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal", "Analisis Fundamental","Indicador Tecnico"])
+informacion_empresa, informacion_precios, noticias, Portafolio, Datos_Financieros, Indicador_Tecnico = st.tabs(["¿De que trata la Empresa?", "Datos de precios", "Top 10 noticias", "Portafolio Personal", "Analisis Financiero","Indicador Tecnico"])
 
 with informacion_empresa:
       if 'longBusinessSummary' in tickerData.info:
@@ -173,13 +175,21 @@ with Portafolio:
         for ticker, Cantidad in portfolio_info:
           st.text(f"ticker: {ticker}, Cantidad: {Cantidad}")    
 
-with Analisis_Fundamental:
-    st.subheader("Datos Fundamentales: ")
+with Datos_Financieros:
+    url_base = 'https://financialmodelingprep.com/api/v3'
+    st.write("Este apartado tiene informacion del ",ticker," ademas de los datos de precios historicos, que se encuentran en la seccion 'Datos de precios'")
+    datos_financieros_extras = st.selectbox("Información Financiera ", options = ('income-statement','balance-sheet-statement','cash-flow-statement','income-statement-growth',
+                                                                     'balance-sheet-statement-growth','cash-flow-statement-growth','ratios-ttm','ratios','financial-growth',
+                                                                    'quote','rating','enterprise-values','key-metrics-ttm','key-metrics','historical-rating','discounted-cash-flow',
+                                                                     'historical-discounted-cash-flow-statement')
+    url = f'{base_url}/{datos_financieros_extras}/{ticker}?apikey={API_KEY_FMP}'
+    df_financiero = requests.get(url).json()
+    st.write(df)
 
 with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
-    df = pd.DataFrame()
-    ind_list = df.ta.indicators(as_list = True)
+    df_indicators = pd.DataFrame()
+    ind_list = df_indicators.ta.indicators(as_list = True)
     technical_indicator = st.selectbox("Indicador Tecnológico ", options = ind_list)
     method = technical_indicator
     indicator = pd.DataFrame(getattr(ta,method)(low = data["Low"], close = data["Close"], high = data["High"], open = data["Open"], volume = data["Volume"]))
