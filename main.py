@@ -193,7 +193,7 @@ with Indicador_Tecnico:
     st.subheader("Analisis Tecnico: ")
     df_indicators = pd.DataFrame()
     ind_list = df_indicators.ta.indicators(as_list = True)
-    technical_indicator = st.selectbox("Indicador Tecnológico ", options = ind_list)
+    technical_indicator = st.selectbox("Indicador Tecnico ", options = ind_list)
     method = technical_indicator
     indicator = pd.DataFrame(getattr(ta,method)(low = data["Low"], close = data["Close"], high = data["High"], open = data["Open"], volume = data["Volume"]))
     indicator["Close"] = data["Close"]
